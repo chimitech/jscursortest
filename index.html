@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>the pesky fly with jay leno's face...and friends</title>
+<style type="text/css">
+body{
+	background-color: #212121;
+	color: #c0c0c0;
+	
+}
+#container{
+	width:3000px;
+	height:3000px;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	cursor:url('images/swatter.gif') 16 16,auto;
+}
+#fly{
+	width:50px;
+	height:50px;
+	position:absolute;
+	background-image:url('images/fly.gif');
+}
+</style>
+</head>
+<body onmousemove="dispC(event)">
+	<div id="container">
+<p><img src="images/fly.gif" onclick="makeFly()" alt="fly and swatter" />&nbsp;<img src="images/lady.gif" onclick="makeLady()" alt="marion and norman" />&nbsp;<img src="images/mag.gif" onclick="makeMag()" alt="magnet" />&nbsp;<img src="images/coords.gif" onclick="vizC(event)" alt="view coordinates" /><img src="images/huh.gif" onclick="huh()" alt="huh?"/></p>
+<div id="fly"></div>
+<br />
+<br />
+<br />
+<p id="demo" style="visibility:hidden"></p>
+<p id="demo2" style="visibility:hidden" onclick="hidC()"><i onclick="hidC()">please click here to hide me.</i></p>
+<p id="showCoords"></p>
+
+</div>
+<script type="text/javascript">
+var initX, initY;
+initX = getRandomArbitrary(0,600);
+initY = getRandomArbitrary(0,600);
+var fly = document.getElementById('fly');
+fly.style.left = initX + 'px';
+fly.style.top = initY + 'px';
+var w = window.innerWidth;
+var h = window.innerHeight;
+var ow = window.outerWidth; //including toolbars and status bar etc.
+var oh = window.outerHeight;
+var buzz = new Audio('sounds/buzz.mp3');
+var eek = new Audio('sounds/eek.mp3');
+var mag = new Audio('sounds/mag.mp3')
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+function dispC(event){
+document.getElementById("demo").innerHTML = 'X is ' + initX + '<br />' + 'Y is ' + initY + '<br />' + 'mouse x is ' + event.pageX;
+}
+function vizC(event){
+document.getElementById("demo").style.visibility = 'visible';
+document.getElementById("demo2").style.visibility = 'visible';
+}
+function hidC(event){
+document.getElementById("demo").style.visibility = 'hidden';
+document.getElementById("demo2").style.visibility = 'hidden';
+}
+document.getElementById("fly").onmousemove = function(event){
+	var mouseX = event.pageX;
+	var mouseY = event.pageY;
+	if (mouseX >= initX+25 && mouseX <= initX+60 && initX>=0){
+	initX -= 5;
+	fly.style.left = initX + 'px';
+	}
+	if (mouseX >= initX-20 && mouseX <= initX + 25 && initX+50<=w){
+		initX += 5;
+		fly.style.left = initX + 'px';
+	}
+	if (mouseY <= initY + 25 && mouseY >= initY - 20 && initY + 50 <= h){
+		initY +=4;
+		fly.style.top = initY + 'px';
+	}
+	if (mouseY >= initY + 25 && mouseY <= initY + 60 && initY >= 0){
+		initY -= 4;
+		fly.style.top = initY + 'px';
+	}
+
+	
+}
+function makeFly(){
+	buzz.play();
+var newCur = document.getElementById("container");
+newCur.style.cursor = "url('images/swatter.gif') 16 16,auto";
+var flyPic = document.getElementById("fly");
+flyPic.style.backgroundImage = "url(images/fly.gif)";
+}
+function makeLady(){
+	eek.play();
+	var newCur = document.getElementById("container");
+newCur.style.cursor = "url('images/norman.gif') 25 25,auto";
+	var ladyPic = document.getElementById("fly");
+	ladyPic.style.backgroundImage = "url(images/lady.gif)";
+
+}
+function makeMag(){
+	mag.play();
+	var newCur = document.getElementById("container");
+newCur.style.cursor = "url('images/emag.gif') 10 25,auto";
+	var ladyPic = document.getElementById("fly");
+	ladyPic.style.backgroundImage = "url(images/mag.gif)";
+}
+function huh(){
+	alert("hello, thank you for visiting my website.\ni had a lot of fun making all the little icons and sounds. the coding was the result of a few days of blinding rage and frustration that ultimately became the wonderful little page you see before you today.\ni could not have achieved this wonderful success without the music of guy akimoto, glen campbell, and merle haggard; the teachings of dr. bradbury, w3schools, and various strangers on stackoverflow; and the infinite content troves of youtube and soundjax.com\nleon b. 2017")
+}
+
+
+</script>
+</body>
+</html>
